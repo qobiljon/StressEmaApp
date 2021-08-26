@@ -70,15 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     if (_userId == null)
       return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.logout),
-              onPressed: _logoutClick,
-            )
-          ],
-        ),
+        appBar: AppBar(title: Text(widget.title), actions: <Widget>[
+          IconButton(icon: Icon(Icons.logout), onPressed: _logoutClick)
+        ]),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,7 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
     else
       return Scaffold(
         backgroundColor: Color.fromRGBO(240, 242, 245, 1),
-        appBar: AppBar(title: Text('Submit EMA (Participant : $_userId)')),
+        appBar: AppBar(title: Text('Submit EMA (Participant : $_userId)'), actions: <Widget>[
+          IconButton(icon: Icon(Icons.logout), onPressed: _logoutClick)
+        ]),
         body: ListView(
           children: [
             Card(
@@ -383,7 +379,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ElevatedButton.icon(
                   onPressed: _submitClick,
                   icon: Icon(Icons.send, color: Colors.white),
-                  label: Text('Submit EMA', style: TextStyle(fontSize: 18, color: Colors.white)),
+                  label: Text('Submit EMA',
+                      style: TextStyle(fontSize: 18, color: Colors.white)),
                 ),
               ),
             ),
