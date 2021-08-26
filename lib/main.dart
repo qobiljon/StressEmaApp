@@ -72,11 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
       return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: _logoutClick,
-          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: _logoutClick,
+            )
+          ],
         ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
