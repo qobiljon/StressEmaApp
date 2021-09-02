@@ -11,8 +11,22 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 
+import 'package:stress_ema_app/services/LocalNotificationService.dart';
+
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationService.initialize();
+  Firebase.initializeApp().then((_) async {
+    if (Platform.isIOS) {
+      final res = await FirebaseMessaging.instance.requestPermission(alert: true, announcement: true, badge: true);
+      print('User granted permission: ${res.authorizationStatus}');
+    }
+    FirebaseMessaging.onBackgroundMessage((message) async {
+      await Firebase.initializeApp();
+      LocalNotificationService.display(message);
+    });
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -25,6 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Stress EMA App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -47,12 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
   static int userId;
 
   // region EMA response values + position
-  int _cheerfulValue = 2;
-  int _happyValue = 2;
-  int _angryValue = 2;
-  int _nervousValue = 2;
-  int _sadValue = 2;
-  int _activityValue = 0;
+  int _cheerfulValue = -1;
+  int _happyValue = -1;
+  int _angryValue = -1;
+  int _nervousValue = -1;
+  int _sadValue = -1;
+  int _activityValue = -1;
   Position _position;
 
   // endregion
@@ -63,13 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _getGPSPosition().then((position) => _position = position);
     SharedPreferences.getInstance().then((prefs) => (prefs.containsKey('userId') ? setState(() => userId = prefs.getInt('userId')) : null));
-    Firebase.initializeApp().then((_) async {
-      if (Platform.isIOS) {
-        final res = await FirebaseMessaging.instance.requestPermission(alert: true, announcement: true, badge: true);
-        print('User granted permission: ${res.authorizationStatus}');
-      }
-      _saveFCMToken();
-    });
+
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((message) => LocalNotificationService.display(message));
   }
 
   @override
@@ -203,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             setState(() {
                               userId = js['userId'];
                               SharedPreferences.getInstance().then((prefs) => prefs.setInt('userId', userId));
-                              _saveFCMToken();
+                              _updateFCMToken(userId);
                               Navigator.of(context).pop();
                             });
                           } else
@@ -226,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final js = jsonDecode(res.body);
       setState(() {
         userId = js['userId'];
-        _saveFCMToken();
+        _updateFCMToken(userId);
         SharedPreferences.getInstance().then((prefs) => prefs.setInt('userId', userId));
       });
     }
@@ -308,12 +319,27 @@ class _MyHomePageState extends State<MyHomePage> {
       emaResponse.saveReport();
   }
 
-  void _saveFCMToken() async {
+  void _updateFCMToken(int userId) async {
     final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey('userId')) {
-      userId = prefs.getInt('userId');
-      String fcmToken = await FirebaseMessaging.instance.getToken();
-      if (fcmToken != null) print('userId($userId), fcmToken($fcmToken)');
+    String fcmToken = await FirebaseMessaging.instance.getToken();
+    if (fcmToken != null) {
+      print('userId($userId), fcmToken($fcmToken)');
+      _setFCMTokenOnServer(userId, fcmToken);
+    }
+  }
+
+  void _setFCMTokenOnServer(int userId, String fcmToken) async {
+    final res = await http.post(
+      Uri.parse('http://165.246.42.172/api/set_fcm_token'),
+      headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8'},
+      body: jsonEncode(<String, dynamic>{'userId': userId, 'fcmToken': fcmToken}),
+    );
+    if (res.statusCode == 200) {
+      final js = jsonDecode(res.body);
+      if (js['success'])
+        toast('Ready to receive EMA notifications!');
+      else
+        toast('Failed to prepare for EMA notifications !');
     }
   }
 
