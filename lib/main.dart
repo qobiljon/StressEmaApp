@@ -1,19 +1,26 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stress_ema_app/EMAReport.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'dart:async';
 import 'dart:io';
-
-import 'package:stress_ema_app/EMAReport.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  @override
+  StatelessElement createElement() {
+    return super.createElement();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,6 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _getGPSPosition().then((position) => _position = position);
     SharedPreferences.getInstance().then((prefs) => (prefs.containsKey('userId') ? setState(() => userId = prefs.getInt('userId')) : null));
+    Firebase.initializeApp().then((_) async {
+      if (Platform.isIOS) {
+        final res = await FirebaseMessaging.instance.requestPermission(alert: true, announcement: true, badge: true);
+        print('User granted permission: ${res.authorizationStatus}');
+      }
+      _saveFCMToken();
+    });
   }
 
   @override
@@ -189,6 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             setState(() {
                               userId = js['userId'];
                               SharedPreferences.getInstance().then((prefs) => prefs.setInt('userId', userId));
+                              _saveFCMToken();
                               Navigator.of(context).pop();
                             });
                           } else
@@ -211,6 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final js = jsonDecode(res.body);
       setState(() {
         userId = js['userId'];
+        _saveFCMToken();
         SharedPreferences.getInstance().then((prefs) => prefs.setInt('userId', userId));
       });
     }
@@ -290,6 +306,15 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     } else
       emaResponse.saveReport();
+  }
+
+  void _saveFCMToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('userId')) {
+      userId = prefs.getInt('userId');
+      String fcmToken = await FirebaseMessaging.instance.getToken();
+      if (fcmToken != null) print('userId($userId), fcmToken($fcmToken)');
+    }
   }
 
   Future<Position> _getGPSPosition() async {

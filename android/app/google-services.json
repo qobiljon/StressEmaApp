@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "79296265957",
+    "firebase_url": "https://etusermanagement.firebaseio.com",
+    "project_id": "etusermanagement",
+    "storage_bucket": "etusermanagement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79296265957:android:044a28b48aef3beeb59e0c",
+        "android_client_info": {
+          "package_name": "inha.nsl.easytrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79296265957-9vceqfdgqqkut5io1kqp4tkiq0gmm78k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "inha.nsl.easytrack",
+            "certificate_hash": "b397b509824f686be8fcdd4cb88a22e9492354e2"
+          }
+        },
+        {
+          "client_id": "79296265957-bj80mbm61c372kv2j0hmgn8fmdocivnk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "inha.nsl.easytrack",
+            "certificate_hash": "82b63aed43dc67817fb47ce43189550aa63bb152"
+          }
+        },
+        {
+          "client_id": "79296265957-68h74l6ku0vg49ika42a8bt9rcfpsaup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2Pzp6Jjta8_myFlV23rjQZnV6wu1AOg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79296265957-68h74l6ku0vg49ika42a8bt9rcfpsaup.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "79296265957-f7mv59jv5162k94tjm1mcrhegcuvqteh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsl.EMA"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79296265957:android:b384cb624978380db59e0c",
+        "android_client_info": {
+          "package_name": "org.codventure.stress_ema_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79296265957-3k5fbaujg8v09igapq6p8gej4n1t8rp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.codventure.stress_ema_app",
+            "certificate_hash": "6c023444aefbd6bc059e6333c45c667bfd3e45c8"
+          }
+        },
+        {
+          "client_id": "79296265957-lg0ldk2hpp6lopeoniubqt6bm1515tht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.codventure.stress_ema_app",
+            "certificate_hash": "66bdd5a198a936cf860dca353f4319bd77836d60"
+          }
+        },
+        {
+          "client_id": "79296265957-68h74l6ku0vg49ika42a8bt9rcfpsaup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2Pzp6Jjta8_myFlV23rjQZnV6wu1AOg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79296265957-68h74l6ku0vg49ika42a8bt9rcfpsaup.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "79296265957-f7mv59jv5162k94tjm1mcrhegcuvqteh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsl.EMA"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
