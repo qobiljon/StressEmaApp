@@ -311,12 +311,14 @@ class _MyHomePageState extends State<MyHomePage> {
         final js = jsonDecode(res.body);
         if (js['success']) {
           toast('Submitted successfully!');
-          Navigator.of(context).pop();
+          exit(0);
         } else
           toast('Failed to submit, please check your internet connection!');
       }
-    } else
+    } else {
       emaResponse.saveReport();
+      exit(0);
+    }
   }
 
   void _updateFCMToken(int userId) async {
