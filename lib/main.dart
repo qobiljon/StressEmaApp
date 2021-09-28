@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Cheerful ?', style: TextStyle(fontSize: 24)),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Radio(value: 0, groupValue: _cheerfulValue, onChanged: _cheerfulChange), Radio(value: 1, groupValue: _cheerfulValue, onChanged: _cheerfulChange), Radio(value: 2, groupValue: _cheerfulValue, onChanged: _cheerfulChange), Radio(value: 3, groupValue: _cheerfulValue, onChanged: _cheerfulChange), Radio(value: 4, groupValue: _cheerfulValue, onChanged: _cheerfulChange)]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Extremely')])
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Slightly'), Text('Moderately'), Text('Very'), Text('Extremely')])
                 ]),
               ),
             ),
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Happy ?', style: TextStyle(fontSize: 24)),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Radio(value: 0, groupValue: _happyValue, onChanged: _happyChange), Radio(value: 1, groupValue: _happyValue, onChanged: _happyChange), Radio(value: 2, groupValue: _happyValue, onChanged: _happyChange), Radio(value: 3, groupValue: _happyValue, onChanged: _happyChange), Radio(value: 4, groupValue: _happyValue, onChanged: _happyChange)]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Extremely')])
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Slightly'), Text('Moderately'), Text('Very'), Text('Extremely')])
                 ]),
               ),
             ),
@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Angry / frustrated ?', style: TextStyle(fontSize: 24)),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Radio(value: 0, groupValue: _angryValue, onChanged: _angryChange), Radio(value: 1, groupValue: _angryValue, onChanged: _angryChange), Radio(value: 2, groupValue: _angryValue, onChanged: _angryChange), Radio(value: 3, groupValue: _angryValue, onChanged: _angryChange), Radio(value: 4, groupValue: _angryValue, onChanged: _angryChange)]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Extremely')])
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Slightly'), Text('Moderately'), Text('Very'), Text('Extremely')])
                 ]),
               ),
             ),
@@ -144,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Nervous / stressed ?', style: TextStyle(fontSize: 24)),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Radio(value: 0, groupValue: _nervousValue, onChanged: _nervousChange), Radio(value: 1, groupValue: _nervousValue, onChanged: _nervousChange), Radio(value: 2, groupValue: _nervousValue, onChanged: _nervousChange), Radio(value: 3, groupValue: _nervousValue, onChanged: _nervousChange), Radio(value: 4, groupValue: _nervousValue, onChanged: _nervousChange)]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Extremely')])
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Slightly'), Text('Moderately'), Text('Very'), Text('Extremely')])
                 ]),
               ),
             ),
@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Sad ?', style: TextStyle(fontSize: 24)),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Radio(value: 0, groupValue: _sadValue, onChanged: _sadChange), Radio(value: 1, groupValue: _sadValue, onChanged: _sadChange), Radio(value: 2, groupValue: _sadValue, onChanged: _sadChange), Radio(value: 3, groupValue: _sadValue, onChanged: _sadChange), Radio(value: 4, groupValue: _sadValue, onChanged: _sadChange)]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Extremely')])
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Not at all'), Text('Slightly'), Text('Moderately'), Text('Very'), Text('Extremely')])
                 ]),
               ),
             ),
@@ -180,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ]),
               ),
             ),
-            Center(child: Container(margin: EdgeInsets.only(bottom: 20), child: ElevatedButton.icon(onPressed: _submitClick, icon: Icon(Icons.send, color: Colors.white), label: Text('Submit EMA', style: TextStyle(fontSize: 18, color: Colors.white))))),
+            Center(child: Container(margin: EdgeInsets.only(bottom: 30, top: 10), width: 250, height: 50, child: ElevatedButton.icon(onPressed: _submitClick, icon: Icon(Icons.send, color: Colors.white), label: Text('Submit EMA', style: TextStyle(fontSize: 22, color: Colors.white))))),
           ],
         ),
       );
